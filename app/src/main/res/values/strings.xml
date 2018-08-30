@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">TrabalhoLFA_Um</string>
+    <string name="label_simbolo_alfabeto"></string>
+    <string name="hint_et_alfabeto">Alfabeto separando por vírgula (ex: 0,1,2)</string>
+    <string name="hint_et_estados">Quantidade de estados (Ex: 4)</string>
+    <string name="hint_et_estado_inicial">Estado inicial (ex: 0)</string>
+    <string name="hint_et_estados_finais">Estados finais separando por vírgula (ex: 0, 3)</string>
+    <string name="hint_et_funcoes">Elabore as funções separando por espaço e ponto e vírgula. Exemplo: (1,a,2); (1,b,3)</string>
+    <string name="label_validar">VALIDAR</string>
+    <string name="msg_alfabeto_vazio">Digite o alfabeto.</string>
+    <string name="msg_alfabeto_invalido_virgula">Alfabeto inválido. Tem vírgula no final.</string>
+    <string name="msg_estados_vazios">Digite a quantidade de estados.</string>
+    <string name="msg_estado_inicial_vazio">Estado inicial vazio.</string>
+    <string name="msg_estados_finais_vazios">Digite os estados finais.</string>
+    <string name="msg_estados_finais_invalidos">Estados finais inválidos. Tem uma vírgula no final.</string>
+    <string name="msg_funcoes_vazias">Digite as funções para que possa ser formado as ligações do autômato.</string>
+</resources>

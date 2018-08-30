@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/layoutEntradas"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="10dp"
+            android:padding="5dp">
+
+            <EditText
+                android:id="@+id/etPalavraEntrada"
+                android:layout_width="0dp"
+                android:layout_weight="5"
+                android:layout_height="45dp"
+                android:hint="Input"/>
+
+            <EditText
+                android:id="@+id/etSaida"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="45dp"
+                android:textSize="13sp"
+                android:hint="S/N"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layoutAlfabeto"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="10dp">
+
+            <ImageView
+                android:id="@+id/ivAlfabeto"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:background="@drawable/ic_alfabeto" />
+
+            <EditText
+                android:id="@+id/etAlfabeto"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:hint="@string/hint_et_alfabeto"
+                android:textSize="13sp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layoutEstados"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="10dp">
+
+            <ImageView
+                android:id="@+id/ivEstados"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:background="@drawable/ic_estados" />
+
+            <EditText
+                android:id="@+id/etEstados"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:hint="@string/hint_et_estados"
+                android:textSize="13sp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layoutEstadoInicial"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="10dp">
+
+            <ImageView
+                android:id="@+id/ivEstadoInicial"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:background="@drawable/ic_estado_inicial" />
+
+            <EditText
+                android:id="@+id/etEstadoInicial"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:hint="@string/hint_et_estado_inicial"
+                android:textSize="13sp"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/layoutEstadoFinais"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="10dp">
+
+            <ImageView
+                android:id="@+id/ivEstadoFinal"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:background="@drawable/ic_estado_final" />
+
+            <EditText
+                android:id="@+id/etEstadosFinais"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:hint="@string/hint_et_estados_finais"
+                android:textSize="13sp"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/layoutFuncoes"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="5dp">
+
+            <ImageView
+                android:id="@+id/ivFuncoes"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:background="@drawable/ic_funcoes"
+                android:layout_gravity="start"/>
+
+            <EditText
+                android:id="@+id/etFuncoes"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:hint="@string/hint_et_funcoes"
+                android:gravity="start"
+                android:textSize="13sp"/>
+
+        </LinearLayout>
+
+
+        <Button
+            android:id="@+id/btnValidar"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="@string/label_validar"/>
+
+    </LinearLayout>
+</ScrollView>
