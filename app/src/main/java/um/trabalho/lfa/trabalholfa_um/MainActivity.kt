@@ -1,10 +1,14 @@
 package um.trabalho.lfa.trabalholfa_um
 
+import android.content.Context
 import android.content.DialogInterface
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
+import android.text.Editable
 import android.util.Log
+import android.view.View
+import android.widget.Toast
 
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -21,6 +25,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         btnValidar.setOnClickListener {
+
+            saveFieldStates()
 
             if (etAlfabeto.text.toString().trim().length == 0) {
                 this.showMessage(R.string.msg_alfabeto_vazio, 0, false)
@@ -41,6 +47,34 @@ class MainActivity : AppCompatActivity() {
             }
 
         }
+
+        btnVerificarInput.setOnClickListener {
+
+            if () {
+
+            }
+
+        }
+
+        this.getAndSetStateValuesFields()
+    }
+
+    fun saveFieldStates() {
+        val ph = PreferencesHelper(this)
+        ph.saveObject("alfabeto", etAlfabeto.text.toString().trim())
+        ph.saveObject("estados", etEstados.text.toString().trim())
+        ph.saveObject("estadoInicial", etEstadoInicial.text.toString().trim())
+        ph.saveObject("estadosFinais", etEstadosFinais.text.toString().trim())
+        ph.saveObject("funcoes", etFuncoes.text.toString().trim())
+    }
+
+    fun getAndSetStateValuesFields() {
+        val ph = PreferencesHelper(this)
+        etAlfabeto.text = Editable.Factory.getInstance().newEditable(ph.getObject("alfabeto"))
+        etEstados.text = Editable.Factory.getInstance().newEditable(ph.getObject("estados"))
+        etEstadoInicial.text = Editable.Factory.getInstance().newEditable(ph.getObject("estadoInicial"))
+        etEstadosFinais.text = Editable.Factory.getInstance().newEditable(ph.getObject("estadosFinais"))
+        etFuncoes.text = Editable.Factory.getInstance().newEditable(ph.getObject("funcoes"))
     }
 
     fun preencherValores() {
@@ -50,7 +84,20 @@ class MainActivity : AppCompatActivity() {
         organizarEstadosFinais(etEstadosFinais.text.toString().trim())
         organizarFuncoes(etFuncoes.text.toString().trim())
 
+        Toast.makeText(this, "Autômato válido!", Toast.LENGTH_LONG).show()
+        setVisibilityBtnInput()
+
 //        printAll()
+    }
+
+    fun setVisibilityBtnInput() {
+        btnVerificarInput.visibility = View.VISIBLE
+        layoutEntradas.visibility = View.VISIBLE
+    }
+
+    fun setInvisibleBtninput() {
+        btnVerificarInput.visibility = View.GONE
+        layoutEntradas.visibility = View.GONE
     }
 
     fun organizarAlfabeto(alfa: String) {
@@ -143,4 +190,7 @@ class MainActivity : AppCompatActivity() {
 
         dialogBuilder.create().show()
     }
+
+
+
 }

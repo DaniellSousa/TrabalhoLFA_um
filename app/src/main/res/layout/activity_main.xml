@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,7 +16,8 @@
             android:orientation="horizontal"
             android:gravity="center_vertical"
             android:layout_marginBottom="10dp"
-            android:padding="5dp">
+            android:padding="5dp"
+            android:visibility="gone">
 
             <EditText
                 android:id="@+id/etPalavraEntrada"
@@ -34,9 +32,16 @@
                 android:layout_weight="1"
                 android:layout_height="45dp"
                 android:textSize="13sp"
-                android:hint="S/N"/>
+                android:hint="S/N" />
 
         </LinearLayout>
+
+        <Button
+            android:id="@+id/btnVerificarInput"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="@string/label_verificar_input_automato"
+            android:visibility="gone"/>
 
         <LinearLayout
             android:id="@+id/layoutAlfabeto"
@@ -107,7 +112,6 @@
 
         </LinearLayout>
 
-
         <LinearLayout
             android:id="@+id/layoutEstadoFinais"
             android:layout_width="match_parent"
@@ -130,7 +134,6 @@
                 android:textSize="13sp"/>
 
         </LinearLayout>
-
 
         <LinearLayout
             android:id="@+id/layoutFuncoes"
@@ -157,12 +160,11 @@
 
         </LinearLayout>
 
-
         <Button
             android:id="@+id/btnValidar"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:text="@string/label_validar"/>
+            android:text="@string/label_validar" />
 
     </LinearLayout>
 </ScrollView>
