@@ -214,6 +214,9 @@ class MainActivity : AppCompatActivity() {
         var itemposterior = ""
         var funcoesPosterior = ArrayList<String>()
 
+        var achouInicial: Boolean = false
+        var automatoValido: Boolean = true
+
         while (i<input.length) {
             itemAtual = input.get(i).toString()
 
@@ -226,9 +229,42 @@ class MainActivity : AppCompatActivity() {
                 itemposterior = ""
             }
 
+            var sair: Boolean = false
+            var j = 0
+
+            if (achouInicial == false) {
+                while (j<funcoesAtual.count()) {
+
+                    if (funcoesAtual.get(j).get(0).toString() == "0") {
+                        achouInicial = true
+                        continue
+                    }
+
+                    if ((j == (funcoesAtual.count()-1)) && (achouInicial == false)) {
+                        sair = true
+                        automatoValido = false
+                    }
+
+                    j += 1
+                }
+            }
+
+            if (sair) {
+                break
+            }
+
+            
+
+
 
 
             i += 1
+        }
+
+        if (automatoValido) {
+            Toast.makeText(this, "Parou por que?", Toast.LENGTH_LONG).show();
+        }else {
+            etSaida.text = Editable.Factory.getInstance().newEditable("N")
         }
 
     }
