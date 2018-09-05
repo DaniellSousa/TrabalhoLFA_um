@@ -30,18 +30,25 @@ class MainActivity : AppCompatActivity() {
 
             if (etAlfabeto.text.toString().trim().length == 0) {
                 this.showMessage(R.string.msg_alfabeto_vazio, 0, false)
+                this.setInvisibleBtninput()
             }else if (etAlfabeto.text.toString().trim()[etAlfabeto.length()-1].equals(",")) {
                 this.showMessage(R.string.msg_alfabeto_invalido_virgula, 0, false)
+                this.setInvisibleBtninput()
             }else if (etEstados.text.toString().length == 0) {
                 this.showMessage(R.string.msg_estados_vazios, 0, false)
-            } else if (etEstadoInicial.text.toString().length == 0) {
+                this.setInvisibleBtninput()
+            }else if (etEstadoInicial.text.toString().length == 0) {
                 this.showMessage(R.string.msg_estado_inicial_vazio, 0, false)
+                this.setInvisibleBtninput()
             }else if (etEstadosFinais.text.toString().trim().length == 0) {
                 this.showMessage(R.string.msg_estados_finais_vazios, 0, false)
+                this.setInvisibleBtninput()
             }else if (etEstadosFinais.text.toString().trim()[etEstadosFinais.length()-1].equals(",")) {
                 this.showMessage( R.string.msg_estados_finais_invalidos, 0, false)
+                this.setInvisibleBtninput()
             }else if (etFuncoes.text.toString().trim().length == 0) {
                 this.showMessage(R.string.msg_funcoes_vazias, 0, false)
+                this.setInvisibleBtninput()
             }else {
                 this.preencherValores()
             }
@@ -50,8 +57,10 @@ class MainActivity : AppCompatActivity() {
 
         btnVerificarInput.setOnClickListener {
 
-            if () {
-
+            if (etPalavraEntrada.text.toString().trim().length == 0) {
+                this.showMessage(R.string.msg_input_vazio, 0, false)
+            }else {
+                checkInput(etPalavraEntrada.text.toString().trim())
             }
 
         }
@@ -87,7 +96,7 @@ class MainActivity : AppCompatActivity() {
         Toast.makeText(this, "Autômato válido!", Toast.LENGTH_LONG).show()
         setVisibilityBtnInput()
 
-//        printAll()
+        printAll()
     }
 
     fun setVisibilityBtnInput() {
@@ -163,11 +172,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun printAll() {
-        Log.e("Alfabeto", this.alfabeto.toString())
-        Log.e("Estados", this.estados.toString())
-        Log.e("Estado inicial", this.estadoinicial.toString())
-        Log.e("Estados finais", this.estadosFinais.toString())
-        Log.e("Funções", this.funcoes.toString())
+        Log.i("teste Alfabeto", this.alfabeto.toString())
+        Log.i("teste Estados", this.estados.toString())
+        Log.i("teste Estado inicial", this.estadoinicial.toString())
+        Log.i("teste Estados finais", this.estadosFinais.toString())
+        Log.i("teste Funções", this.funcoes.toString())
     }
 
     fun showMessage(message: Int, image: Int, isFinish: Boolean) {
@@ -191,6 +200,52 @@ class MainActivity : AppCompatActivity() {
         dialogBuilder.create().show()
     }
 
+    fun checkInput(input: String) {
+//
+//        if (checkNotExistAlfa(input)) {
+//            etSaida.text = Editable.Factory.getInstance().newEditable("S")
+//            return
+//        }
 
+        var i = 0
+        var itemAtual = ""
+        var funcoesAtual = ArrayList<String>()
+
+        var itemposterior = ""
+        var funcoesPosterior = ArrayList<String>()
+
+        while (i<input.length) {
+            itemAtual = input.get(i).toString()
+
+            funcoesAtual = getFuncoesItem(itemAtual)
+
+            if (i < (input.length-1)) {
+                itemposterior = input.get(i+1).toString()
+                funcoesPosterior = getFuncoesItem(itemposterior)
+            }else {
+                itemposterior = ""
+            }
+
+
+
+            i += 1
+        }
+
+    }
+
+    fun getFuncoesItem(item: String): ArrayList<String> {
+        val lista = ArrayList<String>()
+        var i = 0
+
+        while(i < this.funcoes.count()) {
+            if (this.funcoes.get(i).contains(item)) {
+                lista.add(this.funcoes.get(i))
+            }
+
+            i += 1
+        }
+
+        return lista
+    }
 
 }

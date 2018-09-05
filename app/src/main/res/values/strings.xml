@@ -15,4 +15,5 @@
     <string name="msg_estados_finais_invalidos">Estados finais inválidos. Tem uma vírgula no final.</string>
     <string name="msg_funcoes_vazias">Digite as funções para que possa ser formado as ligações do autômato.</string>
     <string name="label_verificar_input_automato">VERIFICAR INPUT</string>
+    <string name="msg_input_vazio">Digite algo no input.</string>
 </resources>
