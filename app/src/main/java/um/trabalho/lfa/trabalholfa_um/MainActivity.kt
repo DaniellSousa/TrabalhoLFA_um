@@ -233,10 +233,11 @@ class MainActivity : AppCompatActivity() {
             var j = 0
 
             if (achouInicial == false) {
-                while (j<funcoesAtual.count()) {
+                while (j < funcoesAtual.count()) {
 
                     if (funcoesAtual.get(j).get(0).toString() == "0") {
                         achouInicial = true
+                        j += 1
                         continue
                     }
 
@@ -249,24 +250,90 @@ class MainActivity : AppCompatActivity() {
                 }
             }
 
+            j = 0;
+            var sair2: Boolean = false
+            while (j < funcoesAtual.count()) {
+
+                var z = 0
+
+                while(z < funcoesPosterior.count()) {
+
+                    if (funcoesAtual.get(j).get(0) == funcoesPosterior.get(z).get(2)) {
+                        automatoValido = true
+                        sair2 = true
+                        break
+                    }
+
+                    z += 1
+                }
+
+                if (sair2)
+                    break
+                else {
+                    automatoValido = false
+                    sair = true
+                }
+
+                j += 1
+            }
+
             if (sair) {
                 break
             }
 
-            
-
-
-
-
             i += 1
+
+            if (!(itemAtual.trim().equals("")) && (itemposterior.trim().equals(""))) {
+
+                if (itemIsInFinalState(funcoesAtual)) {
+                    automatoValido = true
+                }else {
+                    automatoValido = false
+                }
+
+                break
+            }
+
         }
 
         if (automatoValido) {
-            Toast.makeText(this, "Parou por que?", Toast.LENGTH_LONG).show();
+//            Toast.makeText(this, "Parou por que?", Toast.LENGTH_LONG).show();
+            etSaida.text = Editable.Factory.getInstance().newEditable("S")
         }else {
             etSaida.text = Editable.Factory.getInstance().newEditable("N")
         }
 
+    }
+
+    fun itemIsInFinalState(funcoes: ArrayList<String>): Boolean {
+        var i = 0
+
+
+        var sair: Boolean = false
+        while(i < funcoes.count()) {
+            var j = 0
+
+            while(j < estadosFinais.count()) {
+                if (funcoes.get(i).get(2).toString() == estadosFinais.get(j).toString()) {
+                    sair = true
+                    break
+                }
+
+                j += 1
+            }
+
+            if (sair) {
+                break
+            }
+
+            i += 1
+        }
+
+        if (sair) {
+            return true
+        }else {
+            return false
+        }
     }
 
     fun getFuncoesItem(item: String): ArrayList<String> {
