@@ -208,6 +208,10 @@ class MainActivity : AppCompatActivity() {
 //        }
 
         var i = 0
+
+        var itemAnterior = ""
+        var funcoesAnterior = ArrayList<String>()
+
         var itemAtual = ""
         var funcoesAtual = ArrayList<String>()
 
@@ -215,11 +219,18 @@ class MainActivity : AppCompatActivity() {
         var funcoesPosterior = ArrayList<String>()
 
         var achouInicial: Boolean = false
-        var automatoValido: Boolean = true
+        var automatoValidoDireita: Boolean = false
+        var automatoValidoEsquerda: Boolean = false
+        var automatoValido: Boolean = false
 
         while (i<input.length) {
-            itemAtual = input.get(i).toString()
 
+            if (i > 0) {
+                itemAnterior = input.get(i-1).toString()
+                funcoesAnterior = getFuncoesItem(itemAtual)
+            }
+
+            itemAtual = input.get(i).toString()
             funcoesAtual = getFuncoesItem(itemAtual)
 
             if (i < (input.length-1)) {
@@ -250,38 +261,65 @@ class MainActivity : AppCompatActivity() {
                 }
             }
 
-            j = 0;
+            j = 0
             var sair2: Boolean = false
-            while (j < funcoesAtual.count()) {
+            while(j < funcoesAtual.count()) {
 
                 var z = 0
-
-                while(z < funcoesPosterior.count()) {
-
-                    if (funcoesAtual.get(j).get(0) == funcoesPosterior.get(z).get(2)) {
+                while (z < funcoesPosterior.count()) {
+                    if (funcoesAtual.get(j).get(0) == funcoesPosterior.get(z).get(0)
+                    && (!transicoesDistantes(funcoesAtual.get(j), funcoesPosterior.get(z)))
+                    && funcoesAtual.get(j).get(2) != funcoesAtual.get(j).get(0)) {
                         automatoValido = true
                         sair2 = true
+//                        sair = false
                         break
+                    }else if (funcoesAtual.get(j).get(2) == funcoesPosterior.get(z).get(0)
+                            && funcoesPosterior.get(z).get(0) == funcoesPosterior.get(z).get(2)
+                            && (!transicoesDistantes(funcoesAtual.get(j), funcoesPosterior.get(z)))) {
+                        automatoValido = true
+                        sair2 = true
+//                        sair = false
+                        break
+                    }else if (itemAnterior != "") {
+
+                        if ((funcoesAtual.get(j).get(2) == funcoesPosterior.get(z).get(0)
+                                && funcoesPosterior.get(z).get(0) != funcoesPosterior.get(z).get(2)
+                                && funcoesAnterior.get(j).get(0) == funcoesAnterior.get(j).get(2)
+                                && (!transicoesDistantes(funcoesAtual.get(j), funcoesPosterior.get(z))))) {
+                            automatoValido = true
+                            sair2 = true
+//                          sair = false
+                            break
+                        }else {
+                            automatoValido = false
+//                        break
+                            sair2 = true
+                            sair = true
+                        }
+
+                    }else {
+                        automatoValido = false
+//                        break
+                        sair2 = true
+                        sair = true
                     }
 
                     z += 1
                 }
 
-                if (sair2)
+                if (sair2) {
+
+//                    if (automatoValido == true) {
+//                        sair = true
+//                    }
+
                     break
-                else {
-                    automatoValido = false
-                    sair = true
                 }
 
                 j += 1
             }
 
-            if (sair) {
-                break
-            }
-
-            i += 1
 
             if (!(itemAtual.trim().equals("")) && (itemposterior.trim().equals(""))) {
 
@@ -294,6 +332,11 @@ class MainActivity : AppCompatActivity() {
                 break
             }
 
+            if (sair) {
+                break
+            }
+
+            i += 1
         }
 
         if (automatoValido) {
@@ -305,9 +348,32 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    fun transicoesDistantes(fa: String, fp: String): Boolean {
+        var i = 1
+        var j = 1 // (não é o bairro)
+
+        while(i <= this.funcoes.size) {
+            if (fa == this.funcoes.get(i-1)) {
+                break
+            }
+            i += 1
+        }
+
+        while(j <= this.funcoes.size) {
+            if (fp == this.funcoes.get(j-1)) {
+                break
+            }
+
+            j += 1
+        }
+
+        val dif = Math.abs(i - j)
+
+        return dif > 1
+    }
+
     fun itemIsInFinalState(funcoes: ArrayList<String>): Boolean {
         var i = 0
-
 
         var sair: Boolean = false
         while(i < funcoes.count()) {
