@@ -1,6 +1,5 @@
 package um.trabalho.lfa.trabalholfa_um
 
-import android.content.Context
 import android.content.DialogInterface
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -201,12 +200,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun checkInput(input: String) {
-//
-//        if (checkNotExistAlfa(input)) {
-//            etSaida.text = Editable.Factory.getInstance().newEditable("S")
-//            return
-//        }
-
         var i = 0
 
         var itemAnterior = ""
@@ -219,9 +212,9 @@ class MainActivity : AppCompatActivity() {
         var funcoesPosterior = ArrayList<String>()
 
         var achouInicial: Boolean = false
-        var automatoValidoDireita: Boolean = false
-        var automatoValidoEsquerda: Boolean = false
         var automatoValido: Boolean = false
+
+        var sair: Boolean = false
 
         while (i<input.length) {
 
@@ -240,7 +233,6 @@ class MainActivity : AppCompatActivity() {
                 itemposterior = ""
             }
 
-            var sair: Boolean = false
             var j = 0
 
             if (achouInicial == false) {
@@ -248,8 +240,6 @@ class MainActivity : AppCompatActivity() {
 
                     if (funcoesAtual.get(j).get(0).toString() == "0") {
                         achouInicial = true
-                        j += 1
-                        continue
                     }
 
                     if ((j == (funcoesAtual.count()-1)) && (achouInicial == false)) {
@@ -259,6 +249,10 @@ class MainActivity : AppCompatActivity() {
 
                     j += 1
                 }
+            }
+
+            if (sair) {
+                break
             }
 
             j = 0
@@ -272,14 +266,12 @@ class MainActivity : AppCompatActivity() {
                     && funcoesAtual.get(j).get(2) != funcoesAtual.get(j).get(0)) {
                         automatoValido = true
                         sair2 = true
-//                        sair = false
                         break
                     }else if (funcoesAtual.get(j).get(2) == funcoesPosterior.get(z).get(0)
                             && funcoesPosterior.get(z).get(0) == funcoesPosterior.get(z).get(2)
                             && (!transicoesDistantes(funcoesAtual.get(j), funcoesPosterior.get(z)))) {
                         automatoValido = true
                         sair2 = true
-//                        sair = false
                         break
                     }else if (itemAnterior != "") {
 
@@ -289,18 +281,35 @@ class MainActivity : AppCompatActivity() {
                                 && (!transicoesDistantes(funcoesAtual.get(j), funcoesPosterior.get(z))))) {
                             automatoValido = true
                             sair2 = true
-//                          sair = false
+                            break
+                        }else if ((funcoesAtual.get(j).get(2) == funcoesPosterior.get(z).get(2)
+                                    && funcoesPosterior.get(z).get(0) != funcoesPosterior.get(z).get(2)
+                                    && funcoesAnterior.get(j) == funcoesPosterior.get(z))
+                                    && (!transicoesDistantes(funcoesAtual.get(j), funcoesPosterior.get(z)))) {
+                            automatoValido = true
+                            sair2 = true
+                            break
+                        }else if ((funcoesAtual.get(j).get(2) == funcoesPosterior.get(z).get(0)
+                                        && funcoesPosterior.get(z).get(0) != funcoesPosterior.get(z).get(2)
+                                        && funcoesAnterior.get(j) == funcoesPosterior.get(z)
+                                        && (!transicoesDistantes(funcoesAtual.get(j), funcoesPosterior.get(z))))) {
+                            automatoValido = true
+                            sair2 = true
                             break
                         }else {
                             automatoValido = false
-//                        break
                             sair2 = true
                             sair = true
                         }
 
+                    }else if (funcoesAtual.get(j).get(0) == funcoesPosterior.get(z).get(0)
+                            && (!transicoesDistantes(funcoesAtual.get(j), funcoesPosterior.get(z)))
+                            && funcoesAtual.get(j).get(2) == funcoesAtual.get(j).get(0)) {
+                        automatoValido = true
+                        sair2 = true
+                        break
                     }else {
                         automatoValido = false
-//                        break
                         sair2 = true
                         sair = true
                     }
@@ -309,11 +318,6 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 if (sair2) {
-
-//                    if (automatoValido == true) {
-//                        sair = true
-//                    }
-
                     break
                 }
 
@@ -340,7 +344,6 @@ class MainActivity : AppCompatActivity() {
         }
 
         if (automatoValido) {
-//            Toast.makeText(this, "Parou por que?", Toast.LENGTH_LONG).show();
             etSaida.text = Editable.Factory.getInstance().newEditable("S")
         }else {
             etSaida.text = Editable.Factory.getInstance().newEditable("N")
