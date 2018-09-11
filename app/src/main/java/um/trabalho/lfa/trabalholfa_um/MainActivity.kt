@@ -325,9 +325,9 @@ class MainActivity : AppCompatActivity() {
             }
 
 
-            if (!(itemAtual.trim().equals("")) && (itemposterior.trim().equals(""))) {
+            if (i == (input.length-2)) {
 
-                if (itemIsInFinalState(funcoesAtual)) {
+                if (itemIsInFinalState(funcoesPosterior)) {
                     automatoValido = true
                 }else {
                     automatoValido = false
